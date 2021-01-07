@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon name="arrow-back-outline" slot="start" [routerLink]="['..']"></ion-icon>
+    <ion-title>Quiz</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class='ion-padding'>
+  <div *ngIf="isCompleted">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Question {{questionNumber + 1}} / 10</ion-card-subtitle>
+        <ion-card-title>{{quizes[questionNumber].category}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <h4 [innerHTML]="quizes[questionNumber].question"></h4>
+      </ion-card-content>
+      <ion-card-content>
+        <ion-button fill="outline" [innerHTML]="answer" size="medium" [disabled]="isDisabled"
+          *ngFor="let answer of quizes[questionNumber].answers" expand="block" (click)="onSelectAnswer(answer)">
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+    <ion-button color="tertiary" [disabled]="!isDisabled" expand="block" (click)="onClickNext()">{{getButtonCaption()}}
+    </ion-button>
+  </div>
+</ion-content>
